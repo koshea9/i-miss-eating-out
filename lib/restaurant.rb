@@ -2,20 +2,21 @@ class Restaurant
   attr_reader :opening_time,
               :name,
               :dishes,
-              :closing_time,
               :upcase_menu
 
   def initialize(opening_time, name)
     @opening_time = opening_time
     @name = name
     @dishes = []
-    @closing_time = "00:00"
     @upcase_menu =[]
   end
 
-#need to account for edge case where total > 24:00
   def closing_time(hours)
-    "#{(opening_time.to_i + hours)}:00"
+    if (opening_time.to_i + hours) <= 24
+      "#{(opening_time.to_i + hours)}:00"
+    else
+      "#{(opening_time.to_i + hours) - 24}:00"
+    end
   end
 
   def add_dish(dish)
